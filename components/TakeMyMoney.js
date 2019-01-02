@@ -46,8 +46,10 @@ class TakeMyMoney extends Component {
   render () {
     return (
       <User>
-        {({ data: { me } }) => (
-          <Mutation mutation={CREATE_ORDER_MUTATION} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+        {({ data: { me }, loading }) => {
+          if (loading) return null;
+
+          return <Mutation mutation={CREATE_ORDER_MUTATION} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
             {createOrder => (
               <StripeCheckout
                 amount={calcTotalPrice(me.cart)}
@@ -63,10 +65,11 @@ class TakeMyMoney extends Component {
               </StripeCheckout>
             )}
           </Mutation>
-        )}
+        }}
       </User>
     )
   }
 }
 
 export default TakeMyMoney
+export { CREATE_ORDER_MUTATION }
