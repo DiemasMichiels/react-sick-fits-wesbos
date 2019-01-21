@@ -1,3 +1,2 @@
-# Advanced-React
-
-frontend
+# react-sick-fits-wesbos
+React frontend with apollo graphQL
